@@ -1,0 +1,71 @@
+==================================================
+PART 1: THE PROMPT USED TO GENERATE THIS CODE
+==================================================
+Write a C mini-project for a 2D Graphics Editor. 
+
+The program should use a linked list to manage a collection of geometric shapes: Lines, Rectangles, Circles, and Triangles. 
+Each shape should store its coordinates, a unique ID, and a text label.
+
+It needs to have a text-based menu that allows the user to:
+1. Add a new shape
+2. Edit an existing shape by ID
+3. Delete a shape by ID
+4. Show the shapes
+5. Exit
+
+The 'Show' feature should render all the current shapes using ASCII characters ('*' for the shapes and '_' for the background) onto an 80x40 character canvas. Implement basic drawing algorithms (like DDA for lines) from scratch to draw the shapes on this canvas.
+
+Additionally, the program must have file I/O capabilities: it should automatically load shapes from a text file named 'shapes.txt' when the program starts, and save the current list of shapes back to the file when the user exits. 
+
+Keep the code structure simple, "human-typed", and contained within a single file under 250 lines to meet academic project requirements.
+
+==================================================
+PART 2: CODE EXPLANATION (HOW IT WORKS)
+==================================================
+1. Data Structures (The Building Blocks)
+----------------------------------------
+* struct Point: A simple structure holding an 'x' and 'y' coordinate.
+* struct Node: This is the core data structure representing a single shape. It is also a node in a Singly Linked List. It contains:
+  - id: A unique number identifying the shape.
+  - type: An integer indicating the shape (0 = Line, 1 = Rectangle, 2 = Circle, 3 = Triangle).
+  - radius: Used only if the shape is a circle.
+  - p[3]: An array of up to 3 points (e.g., a triangle needs 3 points, a line needs 2, a circle needs 1 for its center).
+  - label: A text name for the shape.
+  - *next: A pointer connecting to the next shape in the linked list.
+
+2. The Drawing Engine (Rendering ASCII Graphics)
+------------------------------------------------
+The program "draws" by placing asterisks (*) into a 2D character array canvas[40][80] (40 rows, 80 columns) acting as the screen.
+* draw_point: The most basic function. It places a '*' at (x, y). Crucially, it checks if x and y are inside the 80x40 boundaries so the program doesn't crash from an out-of-bounds array access.
+* draw_line: Uses the DDA (Digital Differential Analyzer) algorithm. It calculates the distance between two points, figures out how many "steps" it needs to take, and slowly increments the x and y values, drawing points along the path.
+* draw_circle: Iterates over every pixel on the canvas. It calculates the squared distance from the circle's center to the current pixel. Note the (dy * 2) — this is an aspect ratio trick because characters in a terminal are roughly twice as tall as they are wide.
+* draw_rectangle & draw_triangle: These simply reuse the draw_line function to connect the corners/vertices.
+* show_canvas: Fills the whole canvas with underscores (_) for the background. It then loops through the entire linked list. For every shape, it checks 'type' and calls the correct drawing function. Finally, it prints the 2D array row by row to the terminal.
+
+3. Linked List Operations (Managing Data)
+-----------------------------------------
+The program manages shapes in memory using a Singly Linked List.
+* add_shape: Uses malloc() to allocate memory for a new node. It asks the user for the shape type and coordinates, assigns an auto-incrementing id, and adds this new node to the head (start) of the linked list.
+* edit_shape: Asks for an ID, loops through the linked list to find the node with that ID, and overwrites its coordinates.
+* delete_shape: Asks for an ID and loops through the list. It keeps track of the 'prev' (previous) node. When it finds the target node, it updates pointers to bypass it and then uses free() to release the memory back to the system, preventing memory leaks.
+
+4. File I/O (Saving and Loading)
+--------------------------------
+* save_file: Opens 'shapes.txt' in write mode ("w"). It loops through the linked list and uses fprintf() to write every property of each shape onto a new line in the text file. 
+* load_file: Opens 'shapes.txt' in read mode ("r") when the program starts. It uses fscanf() to read the properties line by line, creates a new node for each, and inserts it into the linked list. It also updates the next_id variable so new shapes don't collide with loaded IDs.
+
+5. Main Loop (main function)
+----------------------------
+The main() function ties it all together. It initializes the head of the list to NULL, calls load_file() to grab saved data, and then drops into an infinite while(1) menu loop. It waits for the user to enter a choice (1-5) and calls the corresponding function. When you select '5' (Exit), it automatically calls save_file() before shutting down.
+
+==================================================
+PART 3: QUICK TALKING POINTS (For Your Teacher)
+==================================================
+If your teacher asks you to explain the project quickly, you can use these bullet points:
+
+* Data Structures: I used a Singly Linked List (struct Node) to store the shapes dynamically, meaning there is no hard limit on the number of shapes the user can add.
+* Memory Management: I successfully used malloc() to allocate memory when a shape is added, and free() when a shape is deleted, ensuring there are no memory leaks.
+* Custom Rendering Engine: Instead of using pre-built graphics libraries, I built a custom 2D canvas using an 80x40 character array to render graphics mathematically.
+* Algorithms: I implemented the DDA (Digital Differential Analyzer) algorithm from scratch to accurately draw straight lines and connect vertices for rectangles and triangles.
+* Data Persistence (File I/O): The program automatically saves all shape data to a text file (shapes.txt) upon exit and seamlessly loads it back into memory on startup.
+* Code Quality: I kept the codebase highly modular, clean, and contained entirely within a single C file under 250 lines, meeting all project requirements.
