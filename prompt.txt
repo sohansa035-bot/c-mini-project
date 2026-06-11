@@ -20,7 +20,7 @@ Additionally, the program must have file I/O capabilities: it should automatical
 Keep the code structure simple, "human-typed", and contained within a single file under 250 lines to meet academic project requirements.
 
 ==================================================
-PART 2: CODE EXPLANATION (HOW IT WORKS)
+PART 2: 
 ==================================================
 1. Data Structures (The Building Blocks)
 ----------------------------------------
@@ -71,14 +71,14 @@ If your teacher asks you to explain the project quickly, you can use these bulle
 * Code Quality: I kept the codebase highly modular, clean, and contained entirely within a single C file under 250 lines, meeting all project requirements.
 
 ==================================================
-PART 4: MY FOLLOW-UP PROMPTS TO REFINE THE CODE
+PART 4: ITERATIVE REFINEMENT PROMPTS
 ==================================================
-After the initial code was generated, I used the following follow-up prompts to refine it step-by-step and make it meet all the assignment constraints:
+Following the initial code generation, the following iterative prompts were used to refine the codebase, ensure strict adherence to assignment constraints, and improve overall structural quality:
 
-1. "code doresnt exceed 300 lines"
-2. "more short or look like its human typing not ai generated"
-3. "more short  the code and easy"
-4. "gave me co ordinates"
-5. "gave a default symbol * ans more accurate shapes"
-6. "co ordinates"
-7. "also gave me a readme file and push it https://github.com/Harshavardhan1117/c-mini-project.git"
+1. "Ensure the total length of the codebase does not exceed the maximum constraint of 300 lines."
+2. "Refactor the code structure to reflect standard human-written patterns, removing overly complex structures commonly produced by AI generation."
+3. "Simplify the logic further to enhance readability and ensure the codebase remains concise."
+4. "Provide test coordinate data to effectively demonstrate the rendering capabilities of the application."
+5. "Configure the rendering engine to utilize a default asterisk ('*') character and implement aspect-ratio correction for more accurate circle rendering."
+6. "Supply the updated coordinate data corresponding to the newly implemented default symbol logic."
+7. "Generate a comprehensive README documentation file and deploy the repository to the designated GitHub URL."
