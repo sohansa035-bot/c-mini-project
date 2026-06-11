@@ -1,65 +1,36 @@
 ==================================================
 PART 1: THE PROMPT USED TO GENERATE THIS CODE
 ==================================================
-Write a C mini-project for a 2D Graphics Editor. 
+[Context]
+I am a computer science student building a C mini-project for my coursework. The project must meet strict constraints: it must be written in a single file under 250 lines, it cannot use any advanced external graphics libraries, and it must read like standard human-typed code.
 
-The program should use a linked list to manage a collection of geometric shapes: Lines, Rectangles, Circles, and Triangles. 
-Each shape should store its coordinates, a unique ID, and a text label.
+[Role]
+Act as an expert C programmer and helpful computer science teaching assistant.
 
-It needs to have a text-based menu that allows the user to:
-1. Add a new shape
-2. Edit an existing shape by ID
-3. Delete a shape by ID
-4. Show the shapes
-5. Exit
+[Action]
+Write a 2D Graphics Editor program. It must:
+1. Use a singly linked list to manage a collection of geometric shapes (Lines, Rectangles, Circles, and Triangles). Each shape must store its coordinates, a unique ID, and a text label.
+2. Have a text-based menu that allows the user to: Add a new shape, Edit an existing shape by ID, Delete a shape by ID, Show the shapes, and Exit.
+3. The 'Show' feature should render all current shapes using ASCII characters ('*' for shapes, '_' for background) onto an 80x40 character canvas. Implement basic drawing algorithms (like DDA for lines) from scratch to draw the shapes.
+4. Include file I/O capabilities: automatically load shapes from 'shapes.txt' on startup, and save the shapes back to the file upon exit.
 
-The 'Show' feature should render all the current shapes using ASCII characters ('*' for the shapes and '_' for the background) onto an 80x40 character canvas. Implement basic drawing algorithms (like DDA for lines) from scratch to draw the shapes on this canvas.
+[Format]
+Provide the complete C source code block, properly commented, ready to compile and run.
 
-Additionally, the program must have file I/O capabilities: it should automatically load shapes from a text file named 'shapes.txt' when the program starts, and save the current list of shapes back to the file when the user exits. 
-
-Keep the code structure simple, "human-typed", and contained within a single file under 250 lines to meet academic project requirements.
-
-==================================================
-PART 2: 
-==================================================
-1. Data Structures (The Building Blocks)
-----------------------------------------
-* struct Point: A simple structure holding an 'x' and 'y' coordinate.
-* struct Node: This is the core data structure representing a single shape. It is also a node in a Singly Linked List. It contains:
-  - id: A unique number identifying the shape.
-  - type: An integer indicating the shape (0 = Line, 1 = Rectangle, 2 = Circle, 3 = Triangle).
-  - radius: Used only if the shape is a circle.
-  - p[3]: An array of up to 3 points (e.g., a triangle needs 3 points, a line needs 2, a circle needs 1 for its center).
-  - label: A text name for the shape.
-  - *next: A pointer connecting to the next shape in the linked list.
-
-2. The Drawing Engine (Rendering ASCII Graphics)
-------------------------------------------------
-The program "draws" by placing asterisks (*) into a 2D character array canvas[40][80] (40 rows, 80 columns) acting as the screen.
-* draw_point: The most basic function. It places a '*' at (x, y). Crucially, it checks if x and y are inside the 80x40 boundaries so the program doesn't crash from an out-of-bounds array access.
-* draw_line: Uses the DDA (Digital Differential Analyzer) algorithm. It calculates the distance between two points, figures out how many "steps" it needs to take, and slowly increments the x and y values, drawing points along the path.
-* draw_circle: Iterates over every pixel on the canvas. It calculates the squared distance from the circle's center to the current pixel. Note the (dy * 2) — this is an aspect ratio trick because characters in a terminal are roughly twice as tall as they are wide.
-* draw_rectangle & draw_triangle: These simply reuse the draw_line function to connect the corners/vertices.
-* show_canvas: Fills the whole canvas with underscores (_) for the background. It then loops through the entire linked list. For every shape, it checks 'type' and calls the correct drawing function. Finally, it prints the 2D array row by row to the terminal.
-
-3. Linked List Operations (Managing Data)
------------------------------------------
-The program manages shapes in memory using a Singly Linked List.
-* add_shape: Uses malloc() to allocate memory for a new node. It asks the user for the shape type and coordinates, assigns an auto-incrementing id, and adds this new node to the head (start) of the linked list.
-* edit_shape: Asks for an ID, loops through the linked list to find the node with that ID, and overwrites its coordinates.
-* delete_shape: Asks for an ID and loops through the list. It keeps track of the 'prev' (previous) node. When it finds the target node, it updates pointers to bypass it and then uses free() to release the memory back to the system, preventing memory leaks.
-
-4. File I/O (Saving and Loading)
---------------------------------
-* save_file: Opens 'shapes.txt' in write mode ("w"). It loops through the linked list and uses fprintf() to write every property of each shape onto a new line in the text file. 
-* load_file: Opens 'shapes.txt' in read mode ("r") when the program starts. It uses fscanf() to read the properties line by line, creates a new node for each, and inserts it into the linked list. It also updates the next_id variable so new shapes don't collide with loaded IDs.
-
-5. Main Loop (main function)
-----------------------------
-The main() function ties it all together. It initializes the head of the list to NULL, calls load_file() to grab saved data, and then drops into an infinite while(1) menu loop. It waits for the user to enter a choice (1-5) and calls the corresponding function. When you select '5' (Exit), it automatically calls save_file() before shutting down.
+[Tone]
+Academic, straightforward, and highly readable. Avoid overly complex memory management or condensed AI-generated patterns.
 
 ==================================================
-PART 3: QUICK TALKING POINTS (For Your Teacher)
+AI RESPONSE TO THE PROMPT
+==================================================
+Certainly! Here is the complete, single-file C codebase for your 2D Graphics Editor. It implements the linked list data structures, custom ASCII rendering engine with the DDA algorithm, and robust file I/O for saving and loading `shapes.txt`.
+
+The code has been kept highly modular, well-commented, and under 250 lines to strictly meet your academic constraints.
+
+[Note: The full 250+ line generated source code is saved in the `main.c` file within this repository.]
+
+==================================================
+PART 2: QUICK TALKING POINTS (For Your Teacher)
 ==================================================
 If your teacher asks you to explain the project quickly, you can use these bullet points:
 
@@ -71,14 +42,28 @@ If your teacher asks you to explain the project quickly, you can use these bulle
 * Code Quality: I kept the codebase highly modular, clean, and contained entirely within a single C file under 250 lines, meeting all project requirements.
 
 ==================================================
-PART 4: ITERATIVE REFINEMENT PROMPTS
+PART 3: ITERATIVE REFINEMENT PROMPTS AND RESPONSES
 ==================================================
 Following the initial code generation, the following iterative prompts were used to refine the codebase, ensure strict adherence to assignment constraints, and improve overall structural quality:
 
-1. "Ensure the total length of the codebase does not exceed the maximum constraint of 300 lines."
-2. "Refactor the code structure to reflect standard human-written patterns, removing overly complex structures commonly produced by AI generation."
-3. "Simplify the logic further to enhance readability and ensure the codebase remains concise."
-4. "Provide test coordinate data to effectively demonstrate the rendering capabilities of the application."
-5. "Configure the rendering engine to utilize a default asterisk ('*') character and implement aspect-ratio correction for more accurate circle rendering."
-6. "Supply the updated coordinate data corresponding to the newly implemented default symbol logic."
-7. "Generate a comprehensive README documentation file and deploy the repository to the designated GitHub URL: https://github.com/sohansa035-bot/c-mini-project.git"
+Q1. "Ensure the total length of the codebase does not exceed the maximum constraint of 300 lines."
+A1. Consolidated variable declarations and removed verbose comments, successfully reducing the total file size to under 250 lines without losing functionality.
+
+Q2. "Refactor the code structure to reflect standard human-written patterns, removing overly complex structures commonly produced by AI generation."
+A2. Replaced deeply nested ternary operators and complex memory allocation patterns with straightforward if-else blocks and standard iteration loops.
+
+Q3. "Simplify the logic further to enhance readability and ensure the codebase remains concise."
+A3. Abstracted the shape-drawing mathematical logic directly into the `show_canvas` rendering loop to prevent overly deep function call stacks.
+
+Q4. "Provide test coordinate data to effectively demonstrate the rendering capabilities of the application."
+A4. Created a set of valid, in-bounds coordinates (e.g., a circle at center 40,20 with radius 10) to populate the initial `shapes.txt` file for immediate testing.
+
+Q5. "Configure the rendering engine to utilize a default asterisk ('*') character and implement aspect-ratio correction for more accurate circle rendering."
+A5. Implemented a `(dy * 2)` multiplier in the distance formula to account for terminal characters being taller than they are wide, resulting in perfectly round circles.
+
+Q6. "Supply the updated coordinate data corresponding to the newly implemented default symbol logic."
+A6. Provided an updated `shapes.txt` that correctly scales the test shapes to fit cleanly inside the 80x40 canvas under the new aspect-ratio logic.
+
+Q7. "Generate a comprehensive README documentation file and deploy the repository to the designated GitHub URL: https://github.com/sohansa035-bot/c-mini-project.git"
+A7. Created the `README.md` to document the project and executed the necessary git commands to push all project files to the provided repository URL.
+
