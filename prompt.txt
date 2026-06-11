@@ -81,4 +81,4 @@ Following the initial code generation, the following iterative prompts were used
 4. "Provide test coordinate data to effectively demonstrate the rendering capabilities of the application."
 5. "Configure the rendering engine to utilize a default asterisk ('*') character and implement aspect-ratio correction for more accurate circle rendering."
 6. "Supply the updated coordinate data corresponding to the newly implemented default symbol logic."
-7. "Generate a comprehensive README documentation file and deploy the repository to the designated GitHub URL."
+7. "Generate a comprehensive README documentation file and deploy the repository to the designated GitHub URL: https://github.com/sohansa035-bot/c-mini-project.git"
