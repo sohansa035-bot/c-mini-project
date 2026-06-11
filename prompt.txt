@@ -71,16 +71,14 @@ If your teacher asks you to explain the project quickly, you can use these bulle
 * Code Quality: I kept the codebase highly modular, clean, and contained entirely within a single C file under 250 lines, meeting all project requirements.
 
 ==================================================
-PART 4: AI RESPONSES
+PART 4: MY FOLLOW-UP PROMPTS TO REFINE THE CODE
 ==================================================
-Here is the C code for your 2D Graphics Editor. 
+After the initial code was generated, I used the following follow-up prompts to refine it step-by-step and make it meet all the assignment constraints:
 
-I have written a complete 2D Graphics Editor in C that follows your assignment constraints. The codebase uses a custom 80x40 character canvas and a singly linked list to manage the geometric shapes dynamically. 
-
-Key features implemented:
-- **Dynamic Object Management:** Uses `struct Node` to allow adding, modifying, and deleting shapes (Lines, Rectangles, Circles, and Triangles).
-- **Custom Rendering Engine:** Uses a 2D array (`grid[40][80]`) and mathematical algorithms (like the circle aspect-ratio adjustment) to draw shapes using the '*' character.
-- **File I/O:** Automatically loads from and saves to 'shapes.txt' to persist your drawings.
-- **Academic Requirements:** The code structure is kept simple, readable, and is contained within a single file under 250 lines as requested.
-
-The full source code has been saved to `main.c`. You can compile it using `gcc main.c -o main.exe` and run it to access the text-based menu.
+1. "code doresnt exceed 300 lines"
+2. "more short or look like its human typing not ai generated"
+3. "more short  the code and easy"
+4. "gave me co ordinates"
+5. "gave a default symbol * ans more accurate shapes"
+6. "co ordinates"
+7. "also gave me a readme file and push it https://github.com/Harshavardhan1117/c-mini-project.git"
